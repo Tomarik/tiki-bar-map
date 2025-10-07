@@ -1,11 +1,16 @@
 import { JSX } from "preact";
 
+interface DrinkBadge {
+  name: string;
+  color?: "primary" | "secondary" | "accent" | "neutral" | "info" | "success" | "warning" | "error";
+}
+
 interface TikiBarProps {
   rank: number;
   name: string;
   description: string;
   location: string;
-  favoriteDrinks: string[];
+  favoriteDrinks: DrinkBadge[];
   images: string[];
   lastVisit: string;
   googleMapsUrl: string;
@@ -17,7 +22,10 @@ export default function TikiBarInfo({
   name = "Wusong Tiki Bar",
   description = "Boston's best tiki bar blending New England Chinese flavors with tropical escapism. Hidden in Harvard Square's historic Conductor's Building, this minority and LGBTQ+ owned two-story paradise features Asian American tapas.",
   location = "Cambridge, MA",
-  favoriteDrinks = ["Mai Tai", "The Saturn", "Scorpion Bowl", "Mango Piña Colada"],
+  favoriteDrinks = [
+    { name: "Mai Tai", color: "success" },
+    { name: "Piña Colada", color: "info" }
+  ],
   images = [
     "/images/wusong_road/wusongroad_000.webp",
     "/images/wusong_road/wusongroad_001.webp",
@@ -132,7 +140,6 @@ export default function TikiBarInfo({
                     ? new Date(lastVisit!).toLocaleDateString("en-US", {
                         year: "numeric",
                         month: "long",
-                        day: "numeric",
                       })
                     : "—"}
                 </p>
@@ -144,11 +151,25 @@ export default function TikiBarInfo({
               <div>
                 <h3 className="font-semibold">Our Favorite Drinks</h3>
                 <div className="flex flex-wrap gap-2 mt-2">
-                  {(favoriteDrinks || []).map((drink, i) => (
-                    <span key={i} className="badge badge-accent badge-outline">
-                      {drink}
-                    </span>
-                  ))}
+                  {(favoriteDrinks || []).map((drink, i) => {
+                    const colorClasses = {
+                      primary: "badge badge-primary badge-outline",
+                      secondary: "badge badge-secondary badge-outline",
+                      accent: "badge badge-accent badge-outline",
+                      neutral: "badge badge-neutral badge-outline",
+                      info: "badge badge-info badge-outline",
+                      success: "badge badge-success badge-outline",
+                      warning: "badge badge-warning badge-outline",
+                      error: "badge badge-error badge-outline",
+                    };
+                    const badgeClass = colorClasses[drink.color || "accent"];
+                    
+                    return (
+                      <span key={i} className={badgeClass}>
+                        {drink.name}
+                      </span>
+                    );
+                  })}
                 </div>
               </div>
             </div>
