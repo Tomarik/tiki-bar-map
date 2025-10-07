@@ -6,21 +6,21 @@ interface TikiBarProps {
   description: string;
   location: string;
   favoriteDrinks: string[];
-  image: string;            // single image only
+  image: string;      
   lastVisit: string;
   googleMapsUrl: string;
-  websiteUrl: string;       // direct link to the bar's website
+  websiteUrl: string;    
 }
 
 export default function TikiBarInfo({
   rank = 1,
-  name = "Blue Palm",
+  name = "The Blue Palm",
   description = "A tropical escape with classic tiki cocktails and a laid-back vibe.",
-  location = "123 Paradise Lane, Miami, FL",
+  location = "204 Orchard St, Kansas City, KS",
   favoriteDrinks = ["Mai Tai", "Zombie", "Blue Hawaiian", "Piña Colada"],
   image = "/bluepalm_000.webp",
-  lastVisit = "2024-09-15",
-  googleMapsUrl = "https://maps.google.com/?q=123+Paradise+Lane+Miami+FL",
+  lastVisit = "2025-06-15",
+  googleMapsUrl = "https://maps.google.com/?q=204+Orchahttps://maps.app.goo.gl/Mp1dcPJVgagZKvHp9rd+St,+Kansas+City,+KS",
   websiteUrl = "https://bluepalmtiki.com/",
 }: Partial<TikiBarProps>): JSX.Element {
   const truncatedDescription =

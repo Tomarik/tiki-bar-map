@@ -1,7 +1,6 @@
-import { useSignal } from "@preact/signals";
 import { Head } from "fresh/runtime";
 import { define } from "../utils.ts";
-import TikiBarInfo from "../islands/TikiBarInfo.tsx";
+import TikiBar_TheBluePalm from "../islands/TikiBar_TheBluePalm.tsx";
 
 export default define.page(function Home(ctx) {
   console.log("Shared value " + ctx.state.shared);
@@ -18,7 +17,7 @@ export default define.page(function Home(ctx) {
       </div>
 
       <div class="mt-12 max-w-screen-lg mx-auto">
-        <TikiBarInfo />
+        <TikiBar_TheBluePalm />
       </div>
     </div>
   );
