@@ -19,7 +19,7 @@ export default define.page(function Home(ctx) {
 
       <div class="mt-12 max-w-screen-lg mx-auto">
         <TikiBar_TheBluePalm />
-        <div className="divider"></div>
+        <div className="divider divider-accent"></div>
         <TikiBar_WusongRoad />
       </div>
     </div>

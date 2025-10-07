@@ -6,7 +6,7 @@ interface TikiBarProps {
   description: string;
   location: string;
   favoriteDrinks: string[];
-  images: string[];      // Changed from single image to array
+  images: string[];
   lastVisit: string;
   googleMapsUrl: string;
   websiteUrl: string;    
@@ -14,8 +14,8 @@ interface TikiBarProps {
 
 export default function TikiBarInfo({
   rank = 2,
-  name = "Wusong Road",
-  description = "Boston's best tiki bar blending New England Chinese flavors with tropical escapism. Hidden in Harvard Square's historic Conductor's Building, this minority and LGBTQ+ owned two-story paradise features Asian American tapas by Chef Jason Doo, signature cocktails in custom mugs, and an immersive atmosphere with basket lamps, sculpted clouds, and grass ceilings. Famous for handmade baos, crab rangoons, and the best Mai Tai in Boston.",
+  name = "Wusong Tiki Bar",
+  description = "Boston's best tiki bar blending New England Chinese flavors with tropical escapism. Hidden in Harvard Square's historic Conductor's Building, this minority and LGBTQ+ owned two-story paradise features Asian American tapas.",
   location = "Cambridge, MA",
   favoriteDrinks = ["Mai Tai", "The Saturn", "Scorpion Bowl", "Mango Piña Colada"],
   images = [
@@ -27,9 +27,6 @@ export default function TikiBarInfo({
   googleMapsUrl = "https://maps.app.goo.gl/EmzjRDfhpjuAK98a7",
   websiteUrl = "https://www.wusongroad.com/",
 }: Partial<TikiBarProps>): JSX.Element {
-  const truncatedDescription =
-    (description?.length ?? 0) > 150 ? description!.slice(0, 150) + "..." : description ?? "";
-  
   const modalId = `modal_${rank}_${name.replace(/\s+/g, '_')}`;
   const carouselImages = images && images.length > 0 ? images : ["/images/wusong_road/wusongroad_000.webp"];
 
@@ -76,31 +73,24 @@ export default function TikiBarInfo({
           </div>
 
           <div>
-            <p className="text-base-content/80">{truncatedDescription}</p>
-            {(description?.length ?? 0) > 150 && (
-              <button type="button"
-                className="btn btn-link btn-xs p-0 h-auto min-h-0 text-primary mt-1"
-                onClick={() => (document.getElementById(modalId) as HTMLDialogElement)?.showModal()}
-              >
-                Read more
-              </button>
-            )}
+            <p className="text-base-content/80">{description}</p>
+            <button type="button"
+              className="btn btn-link btn-xs p-0 h-auto min-h-0 text-primary mt-1"
+              onClick={() => (document.getElementById(modalId) as HTMLDialogElement)?.showModal()}
+            >
+              Read our review
+            </button>
           </div>
 
           <div className="divider"></div>
 
           <div className="space-y-3">
             <div className="flex items-center gap-2">
-              <span className="text-2xl">🗺️</span>
-              <div className="flex-1">
-                <h3 className="font-semibold">Location</h3>
-                <p className="text-sm">{location}</p>
-              </div>
               <a
                 href={googleMapsUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="opacity-70 hover:opacity-100 transition-opacity"
+                className="opacity-70 hover:opacity-100 transition-opacity flex-shrink-0"
                 aria-label="Open in Google Maps"
                 title="Open in Google Maps"
               >
@@ -112,6 +102,10 @@ export default function TikiBarInfo({
                   decoding="async"
                 />
               </a>
+              <div className="flex-1">
+                <h3 className="font-semibold">Location</h3>
+                <p className="text-sm">{location}</p>
+              </div>
             </div>
 
             <div className="flex items-center gap-2">
@@ -162,11 +156,57 @@ export default function TikiBarInfo({
         </div>
       </div>
 
-      {/* Modal for full description */}
+      {/* Modal with review */}
       <dialog id={modalId} className="modal">
         <div className="modal-box max-w-2xl">
-          <h3 className="font-bold text-2xl text-primary mb-4">{name}</h3>
-          <p className="py-4 text-base-content/80 leading-relaxed">{description}</p>
+          <h3 className="font-bold text-2xl text-primary mb-4">Our Review: {name}</h3>
+          
+          <div className="space-y-4">
+            {/* Review content */}
+            <div>
+              <h4 className="font-semibold text-lg mb-2">🍜 Food & Drinks</h4>
+              <p className="text-base-content/80">
+                Chef Jason Doo's Asian American tapas menu is outstanding. The handmade baos are 
+                pillowy perfection, and the crab rangoons are crispy, creamy, and absolutely addictive. 
+                Pair them with what we consider the best Mai Tai in Boston - perfectly balanced with 
+                quality rums and fresh ingredients. The Saturn is another standout, and if you're 
+                with a group, the Scorpion Bowl is a must-try experience served in a custom mug.
+              </p>
+            </div>
+
+            <div>
+              <h4 className="font-semibold text-lg mb-2">🏝️ Ambiance & Design</h4>
+              <p className="text-base-content/80">
+                Hidden in Harvard Square's historic Conductor's Building, Wusong Road is a true 
+                tropical escape across two immersive floors. The attention to detail is incredible - 
+                basket lamps cast warm glows, sculpted clouds float overhead, and grass ceilings 
+                transport you far from New England. Every corner offers Instagram-worthy moments 
+                while maintaining an authentic tiki vibe that never feels kitschy.
+              </p>
+            </div>
+
+            <div>
+              <h4 className="font-semibold text-lg mb-2">💙 Community & Values</h4>
+              <p className="text-base-content/80">
+                As a minority and LGBTQ+ owned establishment, Wusong Road creates an inclusive, 
+                welcoming atmosphere where everyone feels at home. The staff embodies this warmth, 
+                treating regulars and first-timers alike with genuine hospitality. It's refreshing 
+                to support a business that represents and celebrates diversity in the Boston bar scene.
+              </p>
+            </div>
+
+            <div>
+              <h4 className="font-semibold text-lg mb-2">⭐ Overall Impression</h4>
+              <p className="text-base-content/80">
+                Wusong Road isn't just Boston's best tiki bar - it's one of the best bars, period. 
+                The fusion of New England Chinese cuisine with tropical escapism creates something 
+                truly unique. Whether you're a tiki enthusiast or just looking for an unforgettable 
+                night out, this two-story paradise in Cambridge delivers on every level. Reservations 
+                recommended, especially on weekends!
+              </p>
+            </div>
+          </div>
+
           <div className="modal-action">
             <form method="dialog">
               <button type="submit" className="btn btn-primary">Close</button>

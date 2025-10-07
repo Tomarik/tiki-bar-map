@@ -6,7 +6,7 @@ interface TikiBarProps {
   description: string;
   location: string;
   favoriteDrinks: string[];
-  images: string[];      // Changed from single image to array
+  images: string[];
   lastVisit: string;
   googleMapsUrl: string;
   websiteUrl: string;    
@@ -15,7 +15,7 @@ interface TikiBarProps {
 export default function TikiBarInfo({
   rank = 1,
   name = "The Blue Palm",
-  description = "A tropical escape with classic tiki cocktails and a laid-back vibe. The staff are so cool. They really know their craft cocktails and are happy to make recommendations based on your preferences. The ambiance is fantastic, with vibrant decor, tiki mugs, and a fun, relaxed atmosphere that makes you feel like you're on a mini-vacation. Their menu features a great selection of tropical drinks, including their signature Blue Hawaiian and Mai Tai, which are both delicious and beautifully presented. It's a perfect spot for a casual night out with friends or a fun date night.",
+  description = "A tropical escape with classic tiki cocktails and a laid-back vibe. The staff are so cool and know their craft cocktails.",
   location = "Kansas City, KS",
   favoriteDrinks = ["Mai Tai", "Zombie", "Blue Hawaiian", "Piña Colada"],
   images = [
@@ -24,12 +24,9 @@ export default function TikiBarInfo({
     "/images/blue_palm/bluepalm_002.webp",
   ],
   lastVisit = "2025-06-15",
-  googleMapsUrl = "https://maps.google.com/?q=204+Orchahttps://maps.app.goo.gl/Mp1dcPJVgagZKvHp9rd+St,+Kansas+City,+KS",
+  googleMapsUrl = "https://maps.app.goo.gl/F2A8SkjPQJfZY4gEA",
   websiteUrl = "https://bluepalmtiki.com/",
 }: Partial<TikiBarProps>): JSX.Element {
-  const truncatedDescription =
-    (description?.length ?? 0) > 150 ? description!.slice(0, 150) + "..." : description ?? "";
-  
   const modalId = `modal_${rank}_${name.replace(/\s+/g, '_')}`;
   const carouselImages = images && images.length > 0 ? images : ["/images/blue_palm/bluepalm_000.webp"];
 
@@ -76,31 +73,24 @@ export default function TikiBarInfo({
           </div>
 
           <div>
-            <p className="text-base-content/80">{truncatedDescription}</p>
-            {(description?.length ?? 0) > 150 && (
-              <button type="button"
-                className="btn btn-link btn-xs p-0 h-auto min-h-0 text-primary mt-1"
-                onClick={() => (document.getElementById(modalId) as HTMLDialogElement)?.showModal()}
-              >
-                Read more
-              </button>
-            )}
+            <p className="text-base-content/80">{description}</p>
+            <button type="button"
+              className="btn btn-link btn-xs p-0 h-auto min-h-0 text-primary mt-1"
+              onClick={() => (document.getElementById(modalId) as HTMLDialogElement)?.showModal()}
+            >
+              Read our review
+            </button>
           </div>
 
           <div className="divider"></div>
 
           <div className="space-y-3">
             <div className="flex items-center gap-2">
-              <span className="text-2xl">🗺️</span>
-              <div className="flex-1">
-                <h3 className="font-semibold">Location</h3>
-                <p className="text-sm">{location}</p>
-              </div>
               <a
                 href={googleMapsUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="opacity-70 hover:opacity-100 transition-opacity"
+                className="opacity-70 hover:opacity-100 transition-opacity flex-shrink-0"
                 aria-label="Open in Google Maps"
                 title="Open in Google Maps"
               >
@@ -112,6 +102,10 @@ export default function TikiBarInfo({
                   decoding="async"
                 />
               </a>
+              <div className="flex-1">
+                <h3 className="font-semibold">Location</h3>
+                <p className="text-sm">{location}</p>
+              </div>
             </div>
 
             <div className="flex items-center gap-2">
@@ -162,11 +156,46 @@ export default function TikiBarInfo({
         </div>
       </div>
 
-      {/* Modal for full description */}
+      {/* Modal with review */}
       <dialog id={modalId} className="modal">
         <div className="modal-box max-w-2xl">
-          <h3 className="font-bold text-2xl text-primary mb-4">{name}</h3>
-          <p className="py-4 text-base-content/80 leading-relaxed">{description}</p>
+          <h3 className="font-bold text-2xl text-primary mb-4">Our Review: {name}</h3>
+          
+          <div className="space-y-4">
+            {/* Review content - customize this section as needed */}
+            <div>
+              <h4 className="font-semibold text-lg mb-2">🍹 Drinks & Menu</h4>
+              <p className="text-base-content/80">
+                The cocktail menu is impressive with classic tiki drinks and creative house specials. 
+                Their Mai Tai is perfectly balanced and the Zombie packs a punch!
+              </p>
+            </div>
+
+            <div>
+              <h4 className="font-semibold text-lg mb-2">🏝️ Ambiance & Decor</h4>
+              <p className="text-base-content/80">
+                Vibrant tiki decor with bamboo accents, tiki mugs, and tropical vibes throughout. 
+                The lighting is dim and cozy, perfect for date nights or hanging with friends.
+              </p>
+            </div>
+
+            <div>
+              <h4 className="font-semibold text-lg mb-2">👥 Service & Staff</h4>
+              <p className="text-base-content/80">
+                The staff really know their craft cocktails and are happy to make recommendations 
+                based on your preferences. Service is friendly and attentive.
+              </p>
+            </div>
+
+            <div>
+              <h4 className="font-semibold text-lg mb-2">⭐ Overall Impression</h4>
+              <p className="text-base-content/80">
+                A fantastic spot that makes you feel like you're on a mini tropical vacation. 
+                Highly recommend for anyone who loves tiki culture and expertly crafted cocktails.
+              </p>
+            </div>
+          </div>
+
           <div className="modal-action">
             <form method="dialog">
               <button type="submit" className="btn btn-primary">Close</button>
