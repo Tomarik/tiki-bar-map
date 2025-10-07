@@ -16,11 +16,11 @@ export default function TikiBarInfo({
   rank = 2,
   name = "Wusong Road",
   description = "Boston's best tiki bar blending New England Chinese flavors with tropical escapism. Hidden in Harvard Square's historic Conductor's Building, this minority and LGBTQ+ owned two-story paradise features Asian American tapas by Chef Jason Doo, signature cocktails in custom mugs, and an immersive atmosphere with basket lamps, sculpted clouds, and grass ceilings. Famous for handmade baos, crab rangoons, and the best Mai Tai in Boston.",
-  location = "112 Mt. Auburn St, Cambridge, MA 02138",
+  location = "Cambridge, MA",
   favoriteDrinks = ["Mai Tai", "The Saturn", "Scorpion Bowl", "Mango Piña Colada"],
   image = "/images/wusong_road/wusongroad_000.webp",
   lastVisit = "2025-09-20",
-  googleMapsUrl = "https://maps.google.com/?q=112+Mt+Auburn+St,+Cambridge,+MA+02138",
+  googleMapsUrl = "https://maps.app.goo.gl/EmzjRDfhpjuAK98a7",
   websiteUrl = "https://www.wusongroad.com/",
 }: Partial<TikiBarProps>): JSX.Element {
   const truncatedDescription =
@@ -41,7 +41,7 @@ export default function TikiBarInfo({
       <div className="card-body lg:w-1/2">
         <div className="flex items-start justify-between gap-4">
           <h2 className="card-title text-3xl text-primary flex-1">{name}</h2>
-          <div className="flex-shrink-0 bg-gradient-to-br from-yellow-400 to-orange-500 text-white font-bold text-2xl w-14 h-14 rounded-full flex items-center justify-center shadow-lg">
+          <div className="flex-shrink-0 bg-gradient-to-br from-yellow-400 to-orange-500 text-white font-bold text-3xl w-14 h-14 rounded-full flex items-center justify-center shadow-lg">
             {rank}
           </div>
         </div>
