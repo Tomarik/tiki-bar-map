@@ -6,7 +6,7 @@ interface TikiBarProps {
   description: string;
   location: string;
   favoriteDrinks: string[];
-  image: string;      
+  images: string[];      // Changed from single image to array
   lastVisit: string;
   googleMapsUrl: string;
   websiteUrl: string;    
@@ -18,7 +18,11 @@ export default function TikiBarInfo({
   description = "A tropical escape with classic tiki cocktails and a laid-back vibe. The staff are so cool. They really know their craft cocktails and are happy to make recommendations based on your preferences. The ambiance is fantastic, with vibrant decor, tiki mugs, and a fun, relaxed atmosphere that makes you feel like you're on a mini-vacation. Their menu features a great selection of tropical drinks, including their signature Blue Hawaiian and Mai Tai, which are both delicious and beautifully presented. It's a perfect spot for a casual night out with friends or a fun date night.",
   location = "Kansas City, KS",
   favoriteDrinks = ["Mai Tai", "Zombie", "Blue Hawaiian", "Piña Colada"],
-  image = "/images/blue_palm/bluepalm_000.webp",
+  images = [
+    "/images/blue_palm/bluepalm_000.webp",
+    "/images/blue_palm/bluepalm_001.webp",
+    "/images/blue_palm/bluepalm_002.webp",
+  ],
   lastVisit = "2025-06-15",
   googleMapsUrl = "https://maps.google.com/?q=204+Orchahttps://maps.app.goo.gl/Mp1dcPJVgagZKvHp9rd+St,+Kansas+City,+KS",
   websiteUrl = "https://bluepalmtiki.com/",
@@ -27,18 +31,40 @@ export default function TikiBarInfo({
     (description?.length ?? 0) > 150 ? description!.slice(0, 150) + "..." : description ?? "";
   
   const modalId = `modal_${rank}_${name.replace(/\s+/g, '_')}`;
+  const carouselImages = images && images.length > 0 ? images : ["/images/blue_palm/bluepalm_000.webp"];
 
   return (
     <>
       <div className="card lg:card-side bg-base-100 shadow-xl max-w-4xl mx-auto">
         <figure className="lg:w-1/2 relative aspect-square">
-          <img
-            src={image || "/images/blue_palm/bluepalm_000.webp"}
-            alt={`${name} - Photo`}
-            className="w-full h-full object-cover"
-            loading="lazy"
-            decoding="async"
-          />
+          {/* Carousel */}
+          <div className="carousel w-full h-full">
+            {carouselImages.map((img, index) => {
+              const slideId = `slide_${rank}_${index}`;
+              const prevIndex = index === 0 ? carouselImages.length - 1 : index - 1;
+              const nextIndex = index === carouselImages.length - 1 ? 0 : index + 1;
+              const prevSlideId = `slide_${rank}_${prevIndex}`;
+              const nextSlideId = `slide_${rank}_${nextIndex}`;
+
+              return (
+                <div key={index} id={slideId} className="carousel-item relative w-full h-full">
+                  <img
+                    src={img}
+                    alt={`${name} - Photo ${index + 1}`}
+                    className="w-full h-full object-cover"
+                    loading="lazy"
+                    decoding="async"
+                  />
+                  {carouselImages.length > 1 && (
+                    <div className="absolute left-5 right-5 top-1/2 flex -translate-y-1/2 transform justify-between">
+                      <a href={`#${prevSlideId}`} className="btn btn-circle">❮</a>
+                      <a href={`#${nextSlideId}`} className="btn btn-circle">❯</a>
+                    </div>
+                  )}
+                </div>
+              );
+            })}
+          </div>
         </figure>
 
         <div className="card-body lg:w-1/2">
@@ -143,12 +169,12 @@ export default function TikiBarInfo({
           <p className="py-4 text-base-content/80 leading-relaxed">{description}</p>
           <div className="modal-action">
             <form method="dialog">
-              <button type="button" className="btn btn-primary">Close</button>
+              <button type="submit" className="btn btn-primary">Close</button>
             </form>
           </div>
         </div>
         <form method="dialog" className="modal-backdrop">
-          <button type="button">close</button>
+          <button type="submit">close</button>
         </form>
       </dialog>
     </>

@@ -6,7 +6,7 @@ interface TikiBarProps {
   description: string;
   location: string;
   favoriteDrinks: string[];
-  image: string;      
+  images: string[];      // Changed from single image to array
   lastVisit: string;
   googleMapsUrl: string;
   websiteUrl: string;    
@@ -18,7 +18,11 @@ export default function TikiBarInfo({
   description = "Boston's best tiki bar blending New England Chinese flavors with tropical escapism. Hidden in Harvard Square's historic Conductor's Building, this minority and LGBTQ+ owned two-story paradise features Asian American tapas by Chef Jason Doo, signature cocktails in custom mugs, and an immersive atmosphere with basket lamps, sculpted clouds, and grass ceilings. Famous for handmade baos, crab rangoons, and the best Mai Tai in Boston.",
   location = "Cambridge, MA",
   favoriteDrinks = ["Mai Tai", "The Saturn", "Scorpion Bowl", "Mango Piña Colada"],
-  image = "/images/wusong_road/wusongroad_000.webp",
+  images = [
+    "/images/wusong_road/wusongroad_000.webp",
+    "/images/wusong_road/wusongroad_001.webp",
+    "/images/wusong_road/wusongroad_002.webp",
+  ],
   lastVisit = "2025-09-20",
   googleMapsUrl = "https://maps.app.goo.gl/EmzjRDfhpjuAK98a7",
   websiteUrl = "https://www.wusongroad.com/",
@@ -27,18 +31,40 @@ export default function TikiBarInfo({
     (description?.length ?? 0) > 150 ? description!.slice(0, 150) + "..." : description ?? "";
   
   const modalId = `modal_${rank}_${name.replace(/\s+/g, '_')}`;
+  const carouselImages = images && images.length > 0 ? images : ["/images/wusong_road/wusongroad_000.webp"];
 
   return (
     <>
       <div className="card lg:card-side bg-base-100 shadow-xl max-w-4xl mx-auto">
         <figure className="lg:w-1/2 relative aspect-square">
-          <img
-            src={image || "/images/wusong_road/wusongroad_000.webp"}
-            alt={`${name} - Photo`}
-            className="w-full h-full object-cover"
-            loading="lazy"
-            decoding="async"
-          />
+          {/* Carousel */}
+          <div className="carousel w-full h-full">
+            {carouselImages.map((img, index) => {
+              const slideId = `slide_${rank}_${index}`;
+              const prevIndex = index === 0 ? carouselImages.length - 1 : index - 1;
+              const nextIndex = index === carouselImages.length - 1 ? 0 : index + 1;
+              const prevSlideId = `slide_${rank}_${prevIndex}`;
+              const nextSlideId = `slide_${rank}_${nextIndex}`;
+
+              return (
+                <div key={index} id={slideId} className="carousel-item relative w-full h-full">
+                  <img
+                    src={img}
+                    alt={`${name} - Photo ${index + 1}`}
+                    className="w-full h-full object-cover"
+                    loading="lazy"
+                    decoding="async"
+                  />
+                  {carouselImages.length > 1 && (
+                    <div className="absolute left-5 right-5 top-1/2 flex -translate-y-1/2 transform justify-between">
+                      <a href={`#${prevSlideId}`} className="btn btn-circle">❮</a>
+                      <a href={`#${nextSlideId}`} className="btn btn-circle">❯</a>
+                    </div>
+                  )}
+                </div>
+              );
+            })}
+          </div>
         </figure>
 
         <div className="card-body lg:w-1/2">
@@ -115,7 +141,7 @@ export default function TikiBarInfo({
                         day: "numeric",
                       })
                     : "—"}
-                  </p>
+                </p>
               </div>
             </div>
 
@@ -143,12 +169,12 @@ export default function TikiBarInfo({
           <p className="py-4 text-base-content/80 leading-relaxed">{description}</p>
           <div className="modal-action">
             <form method="dialog">
-              <button type="button" className="btn btn-primary">Close</button>
+              <button type="submit" className="btn btn-primary">Close</button>
             </form>
           </div>
         </div>
         <form method="dialog" className="modal-backdrop">
-          <button type="button">close</button>
+          <button type="submit">close</button>
         </form>
       </dialog>
     </>
