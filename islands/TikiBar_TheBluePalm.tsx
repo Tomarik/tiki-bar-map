@@ -15,10 +15,10 @@ interface TikiBarProps {
 export default function TikiBarInfo({
   rank = 1,
   name = "The Blue Palm",
-  description = "A tropical escape with classic tiki cocktails and a laid-back vibe.",
-  location = "204 Orchard St, Kansas City, KS",
+  description = "A tropical escape with classic tiki cocktails and a laid-back vibe. The staff are so cool. They really know their craft cocktails and are happy to make recommendations based on your preferences. The ambiance is fantastic, with vibrant decor, tiki mugs, and a fun, relaxed atmosphere that makes you feel like you're on a mini-vacation. Their menu features a great selection of tropical drinks, including their signature Blue Hawaiian and Mai Tai, which are both delicious and beautifully presented. It's a perfect spot for a casual night out with friends or a fun date night.",
+  location = "Kansas City, KS",
   favoriteDrinks = ["Mai Tai", "Zombie", "Blue Hawaiian", "Piña Colada"],
-  image = "/bluepalm_000.webp",
+  image = "/images/blue_palm/bluepalm_000.webp",
   lastVisit = "2025-06-15",
   googleMapsUrl = "https://maps.google.com/?q=204+Orchahttps://maps.app.goo.gl/Mp1dcPJVgagZKvHp9rd+St,+Kansas+City,+KS",
   websiteUrl = "https://bluepalmtiki.com/",
@@ -30,7 +30,7 @@ export default function TikiBarInfo({
     <div className="card lg:card-side bg-base-100 shadow-xl max-w-4xl mx-auto">
       <figure className="lg:w-1/2 relative aspect-square">
         <img
-          src={image || "/bluepalm_000.webp"}
+          src={image || "/images/blue_palm/bluepalm_000.webp"}
           alt={`${name} - Photo`}
           className="w-full h-full object-cover"
           loading="lazy"
@@ -41,7 +41,7 @@ export default function TikiBarInfo({
       <div className="card-body lg:w-1/2">
         <div className="flex items-start justify-between gap-4">
           <h2 className="card-title text-3xl text-primary flex-1">{name}</h2>
-          <div className="flex-shrink-0 bg-gradient-to-br from-yellow-400 to-orange-500 text-white font-bold text-2xl w-14 h-14 rounded-full flex items-center justify-center shadow-lg">
+          <div className="flex-shrink-0 bg-gradient-to-br from-yellow-400 to-orange-500 text-white font-bold text-3xl w-14 h-14 rounded-full flex items-center justify-center shadow-lg">
             {rank}
           </div>
         </div>
