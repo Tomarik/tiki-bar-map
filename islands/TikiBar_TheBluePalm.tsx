@@ -23,6 +23,7 @@ interface TikiBarProps {
   lastVisit: string;
   googleMapsUrl: string;
   websiteUrl: string;
+  bestServedBy?: string;
 }
 
 export default function TikiBarInfo({
@@ -43,6 +44,7 @@ export default function TikiBarInfo({
   lastVisit = "2025-06-15",
   googleMapsUrl = "https://maps.app.goo.gl/F2A8SkjPQJfZY4gEA",
   websiteUrl = "https://bluepalmtiki.com/",
+  bestServedBy
 }: Partial<TikiBarProps>): JSX.Element {
   const modalId = `modal_${rank}_${name.replace(/\s+/g, "_")}`;
   const carouselImages = images && images.length > 0
@@ -197,6 +199,19 @@ export default function TikiBarInfo({
                 </p>
               </div>
             </div>
+
+
+{bestServedBy && (
+  <div className="flex items-center gap-2">
+    <span className="text-2xl">🌟</span>
+    <div className="flex-1">
+      <h3 className="font-semibold">Best Served By</h3>
+      <p className="text-sm font-medium text-primary">
+        {bestServedBy}
+      </p>
+    </div>
+  </div>
+)}
 
             <div className="flex items-start gap-2">
               <span className="text-2xl">🍹</span>

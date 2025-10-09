@@ -54,7 +54,7 @@ export default function TikiBarInfo({
       <div className="card lg:card-side bg-base-100 shadow-xl max-w-4xl mx-auto">
         <figure className="lg:w-1/2 relative aspect-square">
           {/* Carousel */}
-          <div className="carousel w-full h-full" id={`carousel_${rank}`}>
+          <div className="carousel w-full h-full">
             {carouselImages.map((img, index) => {
               const slideId = `slide_${rank}_${index}`;
               const prevIndex = index === 0
@@ -63,26 +63,6 @@ export default function TikiBarInfo({
               const nextIndex = index === carouselImages.length - 1
                 ? 0
                 : index + 1;
-
-              const handlePrev = () => {
-                const carousel = document.getElementById(`carousel_${rank}`);
-                const targetSlide = document.getElementById(
-                  `slide_${rank}_${prevIndex}`,
-                );
-                if (carousel && targetSlide) {
-                  carousel.scrollLeft = targetSlide.offsetLeft;
-                }
-              };
-
-              const handleNext = () => {
-                const carousel = document.getElementById(`carousel_${rank}`);
-                const targetSlide = document.getElementById(
-                  `slide_${rank}_${nextIndex}`,
-                );
-                if (carousel && targetSlide) {
-                  carousel.scrollLeft = targetSlide.offsetLeft;
-                }
-              };
 
               return (
                 <div
@@ -99,20 +79,18 @@ export default function TikiBarInfo({
                   />
                   {carouselImages.length > 1 && (
                     <div className="absolute left-5 right-5 top-1/2 flex -translate-y-1/2 transform justify-between">
-                      <button
-                        type="button"
+                      <a
+                        href={`#slide_${rank}_${prevIndex}`}
                         className="btn btn-circle"
-                        onClick={handlePrev}
                       >
                         ❮
-                      </button>
-                      <button
-                        type="button"
+                      </a>
+                      <a
+                        href={`#slide_${rank}_${nextIndex}`}
                         className="btn btn-circle"
-                        onClick={handleNext}
                       >
                         ❯
-                      </button>
+                      </a>
                     </div>
                   )}
                 </div>
