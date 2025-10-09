@@ -2,6 +2,7 @@ import { Head } from "fresh/runtime";
 import { define } from "../utils.ts";
 import TikiBar_TheBluePalm from "../islands/TikiBar_TheBluePalm.tsx";
 import TikiBar_WusongRoad from "../islands/TikiBar_WusongRoad.tsx";
+import TikiBar_LakaLono from "../islands/TikiBar_LakaLono.tsx";
 
 export default define.page(function Home(ctx) {
   console.log("Shared value " + ctx.state.shared);
@@ -18,6 +19,8 @@ export default define.page(function Home(ctx) {
       </div>
 
       <div class="mt-12 max-w-screen-lg mx-auto">
+        <TikiBar_LakaLono />
+        <div className="divider divider-accent"></div>
         <TikiBar_TheBluePalm />
         <div className="divider divider-accent"></div>
         <TikiBar_WusongRoad />

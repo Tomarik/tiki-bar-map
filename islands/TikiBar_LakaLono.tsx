@@ -27,29 +27,33 @@ interface TikiBarProps {
 }
 
 export default function TikiBarInfo({
-  rank = 2,
-  name = "The Blue Palm",
+  rank = 1,
+  name = "Laka Lono Rum Club",
   description =
     "A tropical escape with classic tiki cocktails and a laid-back vibe. The staff are so cool and know their craft cocktails.",
-  location = "Kansas City, KS",
+  location = "Omaha, NE",
   favoriteDrinks = [
     { name: "Saturn", color: "accent" },
     { name: "Cobra Fang", color: "error" },
   ],
   images = [
-    "/images/blue_palm/bluepalm_000.webp",
-    "/images/blue_palm/bluepalm_001.webp",
-    "/images/blue_palm/bluepalm_002.webp",
+    "/images/laka_lono/lakalono_000.webp",
+    "/images/laka_lono/lakalono_001.webp",
+    "/images/laka_lono/lakalono_002.webp",
+    "/images/laka_lono/lakalono_003.webp",
+    "/images/laka_lono/lakalono_004.webp",
+    "/images/laka_lono/lakalono_005.webp",
+    "/images/laka_lono/lakalono_006.webp",
   ],
   lastVisit = "2025-06-15",
-  googleMapsUrl = "https://maps.app.goo.gl/F2A8SkjPQJfZY4gEA",
-  websiteUrl = "https://bluepalmtiki.com/",
-  bestServedBy = "Roxie",
+  googleMapsUrl = "https://maps.app.goo.gl/MqHT3ZX6GwNixiMB9",
+  websiteUrl = "http://www.lakalono.bar/",
+  bestServedBy
 }: Partial<TikiBarProps>): JSX.Element {
   const modalId = `modal_${rank}_${name.replace(/\s+/g, "_")}`;
   const carouselImages = images && images.length > 0
     ? images
-    : ["/images/blue_palm/bluepalm_000.webp"];
+    : ["/images/laka_lono/lakalono_000.webp"];
 
   return (
     <>

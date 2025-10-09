@@ -26,7 +26,7 @@ interface TikiBarProps {
 }
 
 export default function TikiBarInfo({
-  rank = 2,
+  rank = 3,
   name = "Wusong Tiki Bar",
   description =
     "Boston's best tiki bar blending New England Chinese flavors with tropical escapism. Hidden in Harvard Square's historic Conductor's Building, this minority and LGBTQ+ owned two-story paradise features Asian American tapas.",
