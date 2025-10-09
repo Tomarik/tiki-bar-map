@@ -44,7 +44,7 @@ export default function TikiBarInfo({
   lastVisit = "2025-06-15",
   googleMapsUrl = "https://maps.app.goo.gl/F2A8SkjPQJfZY4gEA",
   websiteUrl = "https://bluepalmtiki.com/",
-  bestServedBy
+  bestServedBy = "Roxie",
 }: Partial<TikiBarProps>): JSX.Element {
   const modalId = `modal_${rank}_${name.replace(/\s+/g, "_")}`;
   const carouselImages = images && images.length > 0
@@ -56,7 +56,7 @@ export default function TikiBarInfo({
       <div className="card lg:card-side bg-base-100 shadow-xl max-w-4xl mx-auto">
         <figure className="lg:w-1/2 relative aspect-square">
           {/* Carousel */}
-          <div className="carousel w-full h-full" id={`carousel_${rank}`}>
+          <div className="carousel w-full h-full">
             {carouselImages.map((img, index) => {
               const slideId = `slide_${rank}_${index}`;
               const prevIndex = index === 0
@@ -65,26 +65,6 @@ export default function TikiBarInfo({
               const nextIndex = index === carouselImages.length - 1
                 ? 0
                 : index + 1;
-
-              const handlePrev = () => {
-                const carousel = document.getElementById(`carousel_${rank}`);
-                const targetSlide = document.getElementById(
-                  `slide_${rank}_${prevIndex}`,
-                );
-                if (carousel && targetSlide) {
-                  carousel.scrollLeft = targetSlide.offsetLeft;
-                }
-              };
-
-              const handleNext = () => {
-                const carousel = document.getElementById(`carousel_${rank}`);
-                const targetSlide = document.getElementById(
-                  `slide_${rank}_${nextIndex}`,
-                );
-                if (carousel && targetSlide) {
-                  carousel.scrollLeft = targetSlide.offsetLeft;
-                }
-              };
 
               return (
                 <div
@@ -101,20 +81,18 @@ export default function TikiBarInfo({
                   />
                   {carouselImages.length > 1 && (
                     <div className="absolute left-5 right-5 top-1/2 flex -translate-y-1/2 transform justify-between">
-                      <button
-                        type="button"
+                      <a
+                        href={`#slide_${rank}_${prevIndex}`}
                         className="btn btn-circle"
-                        onClick={handlePrev}
                       >
                         ❮
-                      </button>
-                      <button
-                        type="button"
+                      </a>
+                      <a
+                        href={`#slide_${rank}_${nextIndex}`}
                         className="btn btn-circle"
-                        onClick={handleNext}
                       >
                         ❯
-                      </button>
+                      </a>
                     </div>
                   )}
                 </div>
@@ -200,18 +178,17 @@ export default function TikiBarInfo({
               </div>
             </div>
 
-
-{bestServedBy && (
-  <div className="flex items-center gap-2">
-    <span className="text-2xl">🌟</span>
-    <div className="flex-1">
-      <h3 className="font-semibold">Best Served By</h3>
-      <p className="text-sm font-medium text-primary">
-        {bestServedBy}
-      </p>
-    </div>
-  </div>
-)}
+            {bestServedBy && (
+              <div className="flex items-center gap-2">
+                <span className="text-2xl">🌟</span>
+                <div className="flex-1">
+                  <h3 className="font-semibold">Best Served By</h3>
+                  <p className="text-sm font-medium text-primary">
+                    {bestServedBy}
+                  </p>
+                </div>
+              </div>
+            )}
 
             <div className="flex items-start gap-2">
               <span className="text-2xl">🍹</span>
