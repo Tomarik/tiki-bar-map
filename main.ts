@@ -11,6 +11,5 @@ app.use(async (ctx) => {
   return await ctx.next();
 });
 
-
 // Include file-system based routes here
 app.fsRoutes();

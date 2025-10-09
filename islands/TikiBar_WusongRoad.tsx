@@ -2,7 +2,15 @@ import { JSX } from "preact";
 
 interface DrinkBadge {
   name: string;
-  color?: "primary" | "secondary" | "accent" | "neutral" | "info" | "success" | "warning" | "error";
+  color?:
+    | "primary"
+    | "secondary"
+    | "accent"
+    | "neutral"
+    | "info"
+    | "success"
+    | "warning"
+    | "error";
 }
 
 interface TikiBarProps {
@@ -14,17 +22,18 @@ interface TikiBarProps {
   images: string[];
   lastVisit: string;
   googleMapsUrl: string;
-  websiteUrl: string;    
+  websiteUrl: string;
 }
 
 export default function TikiBarInfo({
   rank = 2,
   name = "Wusong Tiki Bar",
-  description = "Boston's best tiki bar blending New England Chinese flavors with tropical escapism. Hidden in Harvard Square's historic Conductor's Building, this minority and LGBTQ+ owned two-story paradise features Asian American tapas.",
+  description =
+    "Boston's best tiki bar blending New England Chinese flavors with tropical escapism. Hidden in Harvard Square's historic Conductor's Building, this minority and LGBTQ+ owned two-story paradise features Asian American tapas.",
   location = "Cambridge, MA",
   favoriteDrinks = [
     { name: "Mai Tai", color: "success" },
-    { name: "Piña Colada", color: "info" }
+    { name: "Piña Colada", color: "info" },
   ],
   images = [
     "/images/wusong_road/wusongroad_000.webp",
@@ -35,8 +44,10 @@ export default function TikiBarInfo({
   googleMapsUrl = "https://maps.app.goo.gl/EmzjRDfhpjuAK98a7",
   websiteUrl = "https://www.wusongroad.com/",
 }: Partial<TikiBarProps>): JSX.Element {
-  const modalId = `modal_${rank}_${name.replace(/\s+/g, '_')}`;
-  const carouselImages = images && images.length > 0 ? images : ["/images/wusong_road/wusongroad_000.webp"];
+  const modalId = `modal_${rank}_${name.replace(/\s+/g, "_")}`;
+  const carouselImages = images && images.length > 0
+    ? images
+    : ["/images/wusong_road/wusongroad_000.webp"];
 
   return (
     <>
@@ -46,12 +57,18 @@ export default function TikiBarInfo({
           <div className="carousel w-full h-full" id={`carousel_${rank}`}>
             {carouselImages.map((img, index) => {
               const slideId = `slide_${rank}_${index}`;
-              const prevIndex = index === 0 ? carouselImages.length - 1 : index - 1;
-              const nextIndex = index === carouselImages.length - 1 ? 0 : index + 1;
+              const prevIndex = index === 0
+                ? carouselImages.length - 1
+                : index - 1;
+              const nextIndex = index === carouselImages.length - 1
+                ? 0
+                : index + 1;
 
               const handlePrev = () => {
                 const carousel = document.getElementById(`carousel_${rank}`);
-                const targetSlide = document.getElementById(`slide_${rank}_${prevIndex}`);
+                const targetSlide = document.getElementById(
+                  `slide_${rank}_${prevIndex}`,
+                );
                 if (carousel && targetSlide) {
                   carousel.scrollLeft = targetSlide.offsetLeft;
                 }
@@ -59,14 +76,20 @@ export default function TikiBarInfo({
 
               const handleNext = () => {
                 const carousel = document.getElementById(`carousel_${rank}`);
-                const targetSlide = document.getElementById(`slide_${rank}_${nextIndex}`);
+                const targetSlide = document.getElementById(
+                  `slide_${rank}_${nextIndex}`,
+                );
                 if (carousel && targetSlide) {
                   carousel.scrollLeft = targetSlide.offsetLeft;
                 }
               };
 
               return (
-                <div key={index} id={slideId} className="carousel-item relative w-full h-full">
+                <div
+                  key={index}
+                  id={slideId}
+                  className="carousel-item relative w-full h-full"
+                >
                   <img
                     src={img}
                     alt={`${name} - Photo ${index + 1}`}
@@ -80,12 +103,16 @@ export default function TikiBarInfo({
                         type="button"
                         className="btn btn-circle"
                         onClick={handlePrev}
-                      >❮</button>
+                      >
+                        ❮
+                      </button>
                       <button
                         type="button"
                         className="btn btn-circle"
                         onClick={handleNext}
-                      >❯</button>
+                      >
+                        ❯
+                      </button>
                     </div>
                   )}
                 </div>
@@ -97,16 +124,19 @@ export default function TikiBarInfo({
         <div className="card-body lg:w-1/2">
           <div className="flex items-start justify-between gap-4">
             <h2 className="card-title text-3xl text-primary flex-1">{name}</h2>
-            <div className="flex-shrink-0 bg-gradient-to-br from-yellow-400 to-orange-500 text-white font-bold text-3xl w-14 h-14 rounded-full flex items-center justify-center shadow-lg">
+            <div className="flex-shrink-0 bg-gradient-to-br from-yellow-400 to-orange-500 text-white font-bold text-xl md:text-3xl w-10 h-10 md:w-14 md:h-14 rounded-full flex items-center justify-center shadow-lg">
               {rank}
             </div>
           </div>
 
           <div>
             <p className="text-base-content/80">{description}</p>
-            <button type="button"
+            <button
+              type="button"
               className="btn btn-link btn-xs p-0 h-auto min-h-0 text-primary mt-1"
-              onClick={() => (document.getElementById(modalId) as HTMLDialogElement)?.showModal()}
+              onClick={() =>
+                (document.getElementById(modalId) as HTMLDialogElement)
+                  ?.showModal()}
             >
               Read our review
             </button>
@@ -160,9 +190,9 @@ export default function TikiBarInfo({
                 <p className="text-sm">
                   {new Date(lastVisit || "").toString() !== "Invalid Date"
                     ? new Date(lastVisit!).toLocaleDateString("en-US", {
-                        year: "numeric",
-                        month: "long",
-                      })
+                      year: "numeric",
+                      month: "long",
+                    })
                     : "—"}
                 </p>
               </div>
@@ -185,7 +215,7 @@ export default function TikiBarInfo({
                       error: "badge badge-error badge-outline",
                     };
                     const badgeClass = colorClasses[drink.color || "accent"];
-                    
+
                     return (
                       <span key={i} className={badgeClass}>
                         {drink.name}
@@ -202,50 +232,65 @@ export default function TikiBarInfo({
       {/* Modal with review */}
       <dialog id={modalId} className="modal">
         <div className="modal-box max-w-2xl">
-          <h3 className="font-bold text-2xl text-primary mb-4">Our Review: {name}</h3>
-          
+          <h3 className="font-bold text-2xl text-primary mb-4">
+            Our Review: {name}
+          </h3>
+
           <div className="space-y-4">
             {/* Review content */}
             <div>
               <h4 className="font-semibold text-lg mb-2">🍜 Food & Drinks</h4>
               <p className="text-base-content/80">
-                Chef Jason Doo's Asian American tapas menu is outstanding. The handmade baos are 
-                pillowy perfection, and the crab rangoons are crispy, creamy, and absolutely addictive. 
-                Pair them with what we consider the best Mai Tai in Boston - perfectly balanced with 
-                quality rums and fresh ingredients. The Saturn is another standout, and if you're 
-                with a group, the Scorpion Bowl is a must-try experience served in a custom mug.
+                Chef Jason Doo's Asian American tapas menu is outstanding. The
+                handmade baos are pillowy perfection, and the crab rangoons are
+                crispy, creamy, and absolutely addictive. Pair them with what we
+                consider the best Mai Tai in Boston - perfectly balanced with
+                quality rums and fresh ingredients. The Saturn is another
+                standout, and if you're with a group, the Scorpion Bowl is a
+                must-try experience served in a custom mug.
               </p>
             </div>
 
             <div>
-              <h4 className="font-semibold text-lg mb-2">🏝️ Ambiance & Design</h4>
+              <h4 className="font-semibold text-lg mb-2">
+                🏝️ Ambiance & Design
+              </h4>
               <p className="text-base-content/80">
-                Hidden in Harvard Square's historic Conductor's Building, Wusong Road is a true 
-                tropical escape across two immersive floors. The attention to detail is incredible - 
-                basket lamps cast warm glows, sculpted clouds float overhead, and grass ceilings 
-                transport you far from New England. Every corner offers Instagram-worthy moments 
-                while maintaining an authentic tiki vibe that never feels kitschy.
+                Hidden in Harvard Square's historic Conductor's Building, Wusong
+                Road is a true tropical escape across two immersive floors. The
+                attention to detail is incredible - basket lamps cast warm
+                glows, sculpted clouds float overhead, and grass ceilings
+                transport you far from New England. Every corner offers
+                Instagram-worthy moments while maintaining an authentic tiki
+                vibe that never feels kitschy.
               </p>
             </div>
 
             <div>
-              <h4 className="font-semibold text-lg mb-2">💙 Community & Values</h4>
+              <h4 className="font-semibold text-lg mb-2">
+                💙 Community & Values
+              </h4>
               <p className="text-base-content/80">
-                As a minority and LGBTQ+ owned establishment, Wusong Road creates an inclusive, 
-                welcoming atmosphere where everyone feels at home. The staff embodies this warmth, 
-                treating regulars and first-timers alike with genuine hospitality. It's refreshing 
-                to support a business that represents and celebrates diversity in the Boston bar scene.
+                As a minority and LGBTQ+ owned establishment, Wusong Road
+                creates an inclusive, welcoming atmosphere where everyone feels
+                at home. The staff embodies this warmth, treating regulars and
+                first-timers alike with genuine hospitality. It's refreshing to
+                support a business that represents and celebrates diversity in
+                the Boston bar scene.
               </p>
             </div>
 
             <div>
-              <h4 className="font-semibold text-lg mb-2">⭐ Overall Impression</h4>
+              <h4 className="font-semibold text-lg mb-2">
+                ⭐ Overall Impression
+              </h4>
               <p className="text-base-content/80">
-                Wusong Road isn't just Boston's best tiki bar - it's one of the best bars, period. 
-                The fusion of New England Chinese cuisine with tropical escapism creates something 
-                truly unique. Whether you're a tiki enthusiast or just looking for an unforgettable 
-                night out, this two-story paradise in Cambridge delivers on every level. Reservations 
-                recommended, especially on weekends!
+                Wusong Road isn't just Boston's best tiki bar - it's one of the
+                best bars, period. The fusion of New England Chinese cuisine
+                with tropical escapism creates something truly unique. Whether
+                you're a tiki enthusiast or just looking for an unforgettable
+                night out, this two-story paradise in Cambridge delivers on
+                every level. Reservations recommended, especially on weekends!
               </p>
             </div>
           </div>
