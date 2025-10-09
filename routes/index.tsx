@@ -3,6 +3,7 @@ import { define } from "../utils.ts";
 import TikiBar_TheBluePalm from "../islands/TikiBar_TheBluePalm.tsx";
 import TikiBar_WusongRoad from "../islands/TikiBar_WusongRoad.tsx";
 import TikiBar_LakaLono from "../islands/TikiBar_LakaLono.tsx";
+import TikiBar_ThreeDots from "../islands/TikiBar_ThreeDots.tsx";
 
 export default define.page(function Home(ctx) {
   console.log("Shared value " + ctx.state.shared);
@@ -24,6 +25,8 @@ export default define.page(function Home(ctx) {
         <TikiBar_TheBluePalm />
         <div className="divider divider-accent"></div>
         <TikiBar_WusongRoad />
+        <div className="divider divider-neutral"></div>
+        <TikiBar_ThreeDots />
       </div>
     </div>
   );
